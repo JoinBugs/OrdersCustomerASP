@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using ArdyssLife.Filters;
 
 namespace ArdyssLife
 {
@@ -19,6 +20,9 @@ namespace ArdyssLife
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //added json responses config
+            config.Formatters.Add(new BrowserJsonFormatter());
         }
     }
 }
