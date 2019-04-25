@@ -24,6 +24,12 @@
             this.initialize()
         },
 
+        filters: {
+            formatDate(val) {
+                return moment(val).format('MM/DD/YYYY');
+            }
+        },
+
         methods: {
             initialize() {
                 this.api.getCustomers().then(({ data }) => {
@@ -31,12 +37,8 @@
                 })
             },
 
-            nextStep(n) {
-                if (n === this.steps) {
-                    this.e1 = 1
-                } else {
-                    this.e1 = n + 1
-                }
+            nextStepOrder(item) {
+                this.e1 = this.e1 + 1;
             }
         }
     })
