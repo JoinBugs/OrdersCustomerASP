@@ -9,7 +9,7 @@ namespace ArdyssLife.Contracts
 {
     public interface IOrderRepository
     {
-        List<Orders> GetOrders();
+        List<Orders> GetOrdersByCustomer(int idCustomer);
 
         Orders GetOrderById(int id);
 

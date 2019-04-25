@@ -22,5 +22,18 @@ namespace ArdyssLife.Controllers
                 return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
             }
         }
+
+        [HttpGet]
+        public IHttpActionResult GetCustomer(int id)
+        {
+            try
+            {
+                return Ok(CustomerService.GetCustomer(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
+            }
+        }
     }
 }

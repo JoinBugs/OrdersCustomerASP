@@ -4,36 +4,65 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ArdyssLife.Models;
+using ArdyssLife.Services;
 
 namespace ArdyssLife.Controllers
 {
     public class OrderController : ApiController
     {
-        // GET: api/Order
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("api/order/{idCustomer:int}")]
+        public IHttpActionResult GetOrdersByCustomer(int idCustomer)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                return Ok(OrderService.GetOrdersByCustomer(idCustomer));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
+            }
         }
 
-        // GET: api/Order/5
-        public string Get(int id)
+        [HttpPost]
+        public IHttpActionResult PostOrder(Orders order)
         {
-            return "value";
+            try
+            {
+                return Ok(OrderService.CreateOrder(order));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
+            }
         }
 
-        // POST: api/Order
-        public void Post([FromBody]string value)
+        [HttpPut]
+        public IHttpActionResult PutOrder(Orders order)
         {
+            try
+            {
+                return Ok(OrderService.UpdateOrder(order));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
+            }
         }
 
-        // PUT: api/Order/5
-        public void Put(int id, [FromBody]string value)
+        [HttpDelete]
+        [Route("api/order/{idCustomer:int}")]
+        public IHttpActionResult DeleteOrder(int idCustomer)
         {
-        }
-
-        // DELETE: api/Order/5
-        public void Delete(int id)
-        {
+            try
+            {
+                return Ok(OrderService.DeleteOrder(idCustomer));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message == null ? ex.InnerException.ToString() : ex.Message.ToString());
+            }
         }
     }
 }

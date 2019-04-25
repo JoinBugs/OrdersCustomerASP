@@ -16,6 +16,18 @@ const config = {
     }
 
     this.getOrders = customerId => {
-        return axios.get(config.resolve)
+        return axios.get(config.resolve(customerId, 'order'))
+    }
+
+    this.postOrder = order => {
+        return axios.post(config.resolve('', 'order'), order)
+    }
+
+    this.putOrder = order => {
+        return axios.put(config.resolve('', 'order'), order)
+    }
+
+    this.deleteOrder = idOrder => {
+        return axios.delete(config.resolve(idOrder, 'order'))
     }
 }).apply(api)

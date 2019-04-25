@@ -7,7 +7,6 @@
                     Customers
                 </v-stepper-step>
 
-
                 <v-divider> </v-divider>
 
                 <v-stepper-step :step="0"
@@ -54,9 +53,102 @@
 
             <v-stepper-content :step="2">
                 <v-card class="mb-5"
-                        color="grey lighten-1"
-                        height="200px">
+                        height="500px">
+                    <div>
+                        <v-toolbar flat color="white">
+                            <v-toolbar-title>Orders</v-toolbar-title>
+                            <v-divider class="mx-2"
+                                       inset
+                                       vertical></v-divider>
+                            <v-spacer></v-spacer>
+                            <v-dialog v-model="dialog" max-width="500px" persistent >
+                                <v-btn @@click="onClickAddOrder" slot="activator" color="primary" dark class="mb-2" fab small >
+                                    <v-icon> note_add </v-icon>
+                                </v-btn>
+                                <v-card>
+                                    <v-card-title>
+                                        <span class="headline">{{ formTitle }}</span>
+                                    </v-card-title>
 
+                                    <v-card-text>
+                                        <v-container grid-list-md>
+                                            <v-layout wrap>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field disabled v-model.number="editedItem.OrderId" label="Id"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field disabled v-model="editedItem.OrderDate" label="Order Date"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field v-model.number="editedItem.Subtotal" label="Sub total"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field v-model.number="editedItem.Tax" label="Tax"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field v-model.number="editedItem.Shipping" label="Shipping"></v-text-field>
+                                                </v-flex>
+                                                <v-flex xs12 sm6 md4>
+                                                    <v-text-field v-model.number="editedItem.Total" label="Total"></v-text-field>
+                                                </v-flex>
+                                            </v-layout>
+                                        </v-container>
+                                    </v-card-text>
+
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="blue darken-1" flat @@click="close">Cancel</v-btn>
+                                        <v-btn color="blue darken-1" flat @@click="save">Save</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-toolbar>
+                        <v-data-table :headers="orders_headers"
+                                      :items="orders"
+                                      class="elevation-1">
+                            <template slot="items" slot-scope="props">
+                                <td>{{ props.item.OrderId }}</td>
+                                <td>{{ props.item.OrderDate | formatDate }}</td>
+                                <td>{{ props.item.Subtotal }}</td>
+                                <td>{{ props.item.Tax }}</td>
+                                <td>{{ props.item.Shipping }}</td>
+                                <td>{{ props.item.Total }}</td>
+                                <td class="justify-center layout px-0">
+                                    <v-icon small
+                                            class="mr-2"
+                                            @@click="editItem(props.item)">
+                                        edit
+                                    </v-icon>
+                                    <v-icon small
+                                            @@click="deleteItem(props.item)">
+                                        delete
+                                    </v-icon>
+                                </td>
+                            </template>
+                            <template slot="no-data">
+                                <v-btn color="primary" @@click="initialize">Reset</v-btn>
+                            </template>
+                        </v-data-table>
+                        <v-layout row justify-center>
+                            <v-dialog v-model="dialogDelete" persistent max-width="290">
+                                <v-card>
+                                    <v-card-title class="headline">Are you sure about delete this Order?</v-card-title>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-btn color="green darken-1" flat @@click="dialogDelete = false">Cancel</v-btn>
+                                        <v-btn color="green darken-1" flat @@click="onConfirmDeleteItem">Delete</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-dialog>
+                        </v-layout>
+                        <v-snackbar v-model="snackbar.snackbar"
+                                    :color="snackbar.color"
+                                    :multi-line="false"
+                                    :timeout="snackbar.timeout"
+                                    :vertical="false">
+                            {{ snackbar.text }}
+                        </v-snackbar>
+                    </div>
                 </v-card>
             </v-stepper-content>
         </v-stepper-items>

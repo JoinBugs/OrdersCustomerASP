@@ -44,11 +44,11 @@ namespace ArdyssLife.DAL
             }
         }
 
-        public List<Orders> GetOrders()
+        public List<Orders> GetOrdersByCustomer(int idCustomer)
         {
             try
             {
-                List<Orders> orders = this.context.Orders.ToList<Orders>();
+                List<Orders> orders = this.context.Orders.Where(_order => _order.CustomerId == idCustomer).ToList<Orders>();
                 return orders;
             }
             catch(Exception)
@@ -61,7 +61,9 @@ namespace ArdyssLife.DAL
         {
             try
             {
-                return this.context.Orders.Add(order);
+                Orders orderInserted = this.context.Orders.Add(order);
+                this.context.SaveChanges();
+                return orderInserted;
             }
             catch(Exception)
             {
