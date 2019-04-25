@@ -171,6 +171,7 @@
     <Compile Include="DAL\CustomerRepository.cs" />
     <Compile Include="DAL\OrderDetailRepository.cs" />
     <Compile Include="DAL\OrderRepository.cs" />
+    <Compile Include="Filters\BrowserJsonFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,9 @@
     <Compile Include="Services\OrderService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\general.css" />
+    <Content Include="App\endpoints.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -258,7 +262,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

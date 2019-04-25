@@ -7,12 +7,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link href="~/App/general.css" rel="stylesheet" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    @RenderBody()
+    <section id="app">
+        <v-app id="inspire">
+            @RenderBody()
+        </v-app>
+</section>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script src="~/App/endpoints.js"></script>
+    <script src="~/App/app.js"></script>
 </body>
 </html>

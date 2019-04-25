@@ -1,2 +1,56 @@
-﻿<div class="main-content-home">
+﻿<div>
+    <v-stepper v-model="e1">
+        <v-stepper-header>
+            <template>
+                <v-stepper-step :step="1"
+                                editable>
+                    Customers
+                </v-stepper-step>
+
+                <v-divider> </v-divider>
+
+                <v-stepper-step :step="2"
+                                editable>
+                     Orders
+                </v-stepper-step>
+            </template>
+        </v-stepper-header>
+
+        <v-stepper-items>
+            <v-stepper-content :step="1">
+                <v-card class="mb-5"
+                        height="500px">
+                    <v-data-table :headers="headers"
+                                  :items="customers"
+                                  class="elevation-1">
+                        <template slot="items" slot-scope="props">
+                            <td>{{ props.item.CustomerId }}</td>
+                            <td>{{ props.item.CustomerName }}</td>
+                            <td>{{ props.item.CustomerStatus }}</td>
+                            <td>{{ props.item.CustomerBornDate }}</td>
+                            <td class="justify-center layout px-0">
+                                <v-icon class="mr-2"
+                                        color="blue darken-2"
+                                        @@click="initialize"
+                                >
+                                    local_grocery_store
+                                </v-icon>
+                            </td>
+                        </template>
+                        <template slot="no-data">
+                            <v-btn color="primary" @@click="initialize">Reset</v-btn>
+                        </template>
+                    </v-data-table>
+                </v-card>
+            </v-stepper-content>
+
+            <v-stepper-content :step="2">
+                <v-card class="mb-5"
+                        color="grey lighten-1"
+                        height="200px">
+
+                </v-card>
+            </v-stepper-content>
+        </v-stepper-items>
+    </v-stepper>
 </div>
