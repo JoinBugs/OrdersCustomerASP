@@ -3,6 +3,7 @@
         el: '#app',
         data: () => ({
             api: window.api,
+            customerNameSelected: null,
             headers: [
                 { text: 'Id', value: 'CustomerId' },
                 { text: 'Name', value: 'CustomerName' },
@@ -18,6 +19,10 @@
         },
 
         watch: {
+            e1(val) {
+                if (val == 1)
+                    this.customerNameSelected = null;
+            }
         },
 
         created() {
@@ -38,6 +43,7 @@
             },
 
             nextStepOrder(item) {
+                this.customerNameSelected = item.CustomerName;
                 this.e1 = this.e1 + 1;
             }
         }

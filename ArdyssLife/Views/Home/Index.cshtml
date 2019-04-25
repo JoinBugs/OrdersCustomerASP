@@ -7,11 +7,19 @@
                     Customers
                 </v-stepper-step>
 
+
+                <v-divider> </v-divider>
+
+                <v-stepper-step :step="0"
+                                :editable="false">
+                    {{ customerNameSelected }}
+                </v-stepper-step>
+
                 <v-divider> </v-divider>
 
                 <v-stepper-step :step="2"
-                                editable>
-                     Orders
+                                :editable="false">
+                    Orders
                 </v-stepper-step>
             </template>
         </v-stepper-header>

@@ -14,4 +14,8 @@ const config = {
     this.getCustomers = () => {
         return axios.get(config.resolve(''))
     }
+
+    this.getOrders = customerId => {
+        return axios.get(config.resolve)
+    }
 }).apply(api)
